@@ -40,7 +40,7 @@ class Window extends JFrame{
         }
 
         // passing this value to the controller
-        ThreadsController c
+        ThreadsController c;
         if (gamemode == "two"){
             c = new ThreadsController(new Tuple(5,5), new Tuple(15,15));
         }else{
