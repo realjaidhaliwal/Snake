@@ -48,6 +48,7 @@ class Window extends JFrame{
          }
          c.start();
 
+
         // Links the window to the keyboardlistenner.
         this.addKeyListener((KeyListener) new KeyboardListener());
 
