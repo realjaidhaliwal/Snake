@@ -1,5 +1,7 @@
 package com.snake.game;
 
+import main.java.com.snake.game.Pause;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -26,6 +28,14 @@ public class KeyboardListener extends KeyAdapter{
                 if(ThreadsController.snakeDirection1!=3)
                     ThreadsController.snakeDirection1=4;
                 break;
+
+            case 27:	// -> ESC, pause game pop-up
+                //stop movement
+                //popup
+                Pause pause = new Pause();
+                //resume
+                break;
+
 
             default: 	break;
         }
