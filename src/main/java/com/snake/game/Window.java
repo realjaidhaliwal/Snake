@@ -40,8 +40,12 @@ class Window extends JFrame{
         }
 
         // passing this value to the controller
-        ThreadsController c = new ThreadsController(new Tuple(5,5), new Tuple(15,15));
-        //Let's start the game now..
+        ThreadsController c;
+        if (gamemode == "two"){
+            c = new ThreadsController(new Tuple(5,5), new Tuple(15,15));
+        }else{
+            c = new ThreadsController(new Tuple(5,5));
+        }
         c.start();
 
         // Links the window to the keyboardlistenner.
