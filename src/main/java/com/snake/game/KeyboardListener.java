@@ -27,6 +27,12 @@ public class KeyboardListener extends KeyAdapter{
                     ThreadsController.snakeDirection1=4;
                 break;
 
+            case 27:	// -> ESC, pause game pop-up
+                ThreadsController.paused = true;
+
+                break;
+
+
             default: 	break;
         }
         if (Window.gamemode == "two"){
