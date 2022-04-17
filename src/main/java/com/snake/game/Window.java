@@ -48,14 +48,8 @@ class Window extends JFrame{
         }
         c.start();
 
+
         // Links the window to the keyboardlistenner.
         this.addKeyListener((KeyListener) new KeyboardListener());
-
-        //To do : handle multiplayers .. The above works, test it and see what happens
-
-        //Tuple position2 = new Tuple(13,13);
-        //ControlleurThreads c2 = new ControlleurThreads(position2);
-        //c2.start();
-
     }
 }
