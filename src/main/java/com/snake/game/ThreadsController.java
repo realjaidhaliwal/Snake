@@ -1,5 +1,6 @@
 package com.snake.game;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 
@@ -13,6 +14,7 @@ public class ThreadsController extends Thread {
     long speed = 50;
     public static int snakeDirection1;
     public static int snakeDirection2;
+    public static boolean paused=false;
 
     ArrayList<Tuple> positions1 = new ArrayList<Tuple>();
     ArrayList<Tuple> positions2 = new ArrayList<Tuple>();
@@ -66,6 +68,10 @@ public class ThreadsController extends Thread {
                 moveExternal();
                 deleteTail(snakeSize1, positions1);
                 pauser();
+                if(paused){
+                    pause();
+                    paused = false;
+                }
             }
         } else if (Window.gamemode == "two"){
             while(true){
@@ -76,6 +82,10 @@ public class ThreadsController extends Thread {
                 deleteTail(snakeSize1, positions1);
                 deleteTail(snakeSize2, positions2);
                 pauser();
+                if(paused){
+                    pause();
+                    paused = false;
+                }
             }
         }
     }
@@ -243,5 +253,22 @@ public class ThreadsController extends Thread {
                 cmpt--;
             }
         }
+    }
+
+    private void pause(){
+
+        String title = "Pause";
+        String message = "Press the button below or exit pop-up to go back to the game!";
+        String[] buttonname = {"Back to Game"};
+
+        JOptionPane.showOptionDialog(null,
+                message,
+                title,
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                buttonname, // this is the array
+                "default");
+
     }
 }
