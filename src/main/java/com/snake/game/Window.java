@@ -40,18 +40,16 @@ class Window extends JFrame{
         }
 
         // passing this value to the controller
-        ThreadsController c = new ThreadsController(new Tuple(5,5), new Tuple(15,15));
-        //Let's start the game now..
+        ThreadsController c;
+        if (gamemode == "two"){
+            c = new ThreadsController(new Tuple(5,5), new Tuple(15,15));
+        }else{
+            c = new ThreadsController(new Tuple(5,5));
+        }
         c.start();
+
 
         // Links the window to the keyboardlistenner.
         this.addKeyListener((KeyListener) new KeyboardListener());
-
-        //To do : handle multiplayers .. The above works, test it and see what happens
-
-        //Tuple position2 = new Tuple(13,13);
-        //ControlleurThreads c2 = new ControlleurThreads(position2);
-        //c2.start();
-
     }
 }
