@@ -6,16 +6,18 @@ public class Pause {
 
     public Pause(){
         String title = "Pause";
-        String message = "Press the button below to go back to the game!";
-        String buttonname = "Back to Game";
+        String message = "Press the button below or exit pop-up to go back to the game!";
+        String[] buttonname = {"Back to Game"};
 
-        //JOptionPane.showMessageDialog(null, "infoMessage", "InfoBox: " + "titleBar", JOptionPane.INFORMATION_MESSAGE);
-        JOptionPane pauseBox = new JOptionPane(message,JOptionPane.WARNING_MESSAGE);
-        pauseBox.createDialog(buttonname);
-        JDialog dialog = pauseBox.createDialog(title);
+        JOptionPane.showOptionDialog(null,
+                message,
+                title,
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null,
+                buttonname, // this is the array
+                "default");
 
-        dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true);
     }
 
 }
