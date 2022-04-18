@@ -16,6 +16,7 @@ public class MainMenu extends JFrame{
     private JLabel title;
     private JLabel instructions;
     private JLabel pause;
+    private JLabel snake;
     private JButton onePlayerButton;
     private JButton twoPlayerButton;
     private JPanel panel;
@@ -28,6 +29,8 @@ public class MainMenu extends JFrame{
 
         title = new JLabel("SNAKE");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        snake = new JLabel("𓆚");
+        snake.setAlignmentX(Component.CENTER_ALIGNMENT);
         instructions = new JLabel("use arrow keys and w,a,s,d to play");
         instructions.setAlignmentX(Component.CENTER_ALIGNMENT);
         pause = new JLabel("press 'esc' to pause");
@@ -53,6 +56,7 @@ public class MainMenu extends JFrame{
 
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
         panel.add(title);
+        panel.add(snake);
         panel.add(Box.createRigidArea(new Dimension(0, 100)));
         panel.add(onePlayerButton);
         panel.add(twoPlayerButton);
