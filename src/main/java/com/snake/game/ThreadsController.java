@@ -164,7 +164,6 @@ public class ThreadsController extends Thread {
         String title = "Game Over";
         String[] restart_button = {"Restart", "Quit"};
         String message = "";
-        game.setVisible(false);
         if(Window.gamemode == "one"){
             message = "Your Score: " + score1;
         }else{
@@ -188,6 +187,7 @@ public class ThreadsController extends Thread {
         if(response == JOptionPane.NO_OPTION){
             System.exit(0);
         }else if (response == JOptionPane.YES_OPTION) {
+            game.setVisible(false);
             Main.main(null);
         }else if (response == JOptionPane.CLOSED_OPTION) {
             System.exit(0);
