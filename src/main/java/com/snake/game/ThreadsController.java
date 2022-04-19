@@ -17,13 +17,15 @@ public class ThreadsController extends Thread {
     public static int snakeDirection1;
     public static int snakeDirection2;
     public static boolean paused=false;
+    Window game;
 
     ArrayList<Tuple> positions1 = new ArrayList<Tuple>();
     ArrayList<Tuple> positions2 = new ArrayList<Tuple>();
     Tuple foodPosition;
 
     //Singleplayer Constructor
-    ThreadsController(Tuple initPos){
+    ThreadsController(Window game, Tuple initPos){
+        this.game = game;
         //Get all the threads
         Squares=Window.Grid;
 
@@ -41,7 +43,8 @@ public class ThreadsController extends Thread {
     }
 
     //Multiplayer Constructor
-    ThreadsController(Tuple initPos1, Tuple initPos2){
+    ThreadsController(Window game, Tuple initPos1, Tuple initPos2){
+        this.game = game;
         //Get all the threads
         Squares=Window.Grid;
 
@@ -161,6 +164,7 @@ public class ThreadsController extends Thread {
         String title = "Game Over";
         String[] restart_button = {"Restart", "Quit"};
         String message = "";
+        game.setVisible(false);
         if(Window.gamemode == "one"){
             message = "Your Score: " + score1;
         }else{
