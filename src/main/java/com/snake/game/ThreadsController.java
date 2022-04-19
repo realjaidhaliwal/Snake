@@ -128,17 +128,14 @@ public class ThreadsController extends Thread {
         }
 
         if (nextPos1.equals(nextPos2) || player1Collision && player2Collision){
-            game_over(0);
-            stopTheGame("Tie");
+            stopTheGame(0);
         }
         if (player1Collision){
-            game_over(2);
-            stopTheGame("Player1 died");
+            stopTheGame(2);
             
         }
         if (player2Collision){
-            game_over(1);
-            stopTheGame("Player2 died");
+            stopTheGame(1);
         }
 
         boolean eatingFood1 = nextPos1.equals(foodPosition);
@@ -160,8 +157,37 @@ public class ThreadsController extends Thread {
     }
 
     //Stops The Game
-    private void stopTheGame(String result){
-        System.out.println(result+"\n");
+    private void stopTheGame(int result){
+        String title = "Game Over";
+        String[] restart_button = {"Restart", "Quit"};
+        String message = "";
+        if(Window.gamemode == "one"){
+            message = "Your Score: " + score1;
+        }else{
+            switch(result){
+                case 0:
+                    message = "You Tied!\n" + "Player 1 Score: " + score1 +  "\n" + "Player 2 Score: " + score2;
+                    break;
+                case 1:
+                    message = "Player 1 Wins!\n" + "Player 1 Score: " + score1 +  "\n" + "Player 2 Score: " + score2;
+                    break;
+                case 2:
+                    message = "Player 2 Wins!\n" + "Player 1 Score: " + score1 +  "\n" + "Player 2 Score: " + score2;
+                    break;
+                default: break;
+            }
+        }
+        int response = JOptionPane.showOptionDialog(null, 
+                                                message, title, JOptionPane.OK_CANCEL_OPTION, 
+                                                JOptionPane.INFORMATION_MESSAGE, null, 
+                                                restart_button, null);
+        if(response == JOptionPane.NO_OPTION){
+            System.exit(0);
+        }else if (response == JOptionPane.YES_OPTION) {
+            Main.main(null);
+        }else if (response == JOptionPane.CLOSED_OPTION) {
+            System.exit(0);
+        }
         while(true){
             pauser();
         }
@@ -277,38 +303,5 @@ public class ThreadsController extends Thread {
                 null,
                 buttonname, // this is the array
                 "default");
-    }
-
-    private void game_over(int result){
-        String title = "Game Over";
-        String[] restart_button = {"Restart", "Quit"};
-        String message = "";
-        if(Window.gamemode == "one"){
-            message = "Your Score: " + score1;
-        }else{
-            switch(result){
-                case 0:
-                    message = "You Tied!\n" + "Player 1 Score: " + score1 +  "\n" + "Player 2 Score: " + score2;
-                    break;
-                case 1:
-                    message = "Player 1 Wins!\n" + "Player 1 Score: " + score1 +  "\n" + "Player 2 Score: " + score2;
-                    break;
-                case 2:
-                    message = "Player 2 Wins!\n" + "Player 1 Score: " + score1 +  "\n" + "Player 2 Score: " + score2;
-                    break;
-                default: break;
-            }
-        }
-        int response = JOptionPane.showOptionDialog(null, 
-                                                message, title, JOptionPane.OK_CANCEL_OPTION, 
-                                                JOptionPane.INFORMATION_MESSAGE, null, 
-                                                restart_button, null);
-        if(response == JOptionPane.NO_OPTION){
-            System.exit(0);
-        }else if (response == JOptionPane.YES_OPTION) {
-            Main.main(null);
-        }else if (response == JOptionPane.CLOSED_OPTION) {
-            System.exit(0);
-        }
     }
 }
