@@ -1,10 +1,8 @@
 package com.snake.game;
 
 import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 
-import java.awt.*;
+import java.awt.Button;
 import java.awt.event.KeyEvent;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PauseTest {
 
     @Test
-    public void PauseTest() {
+    public void testPause() {
         //com.snake.game.ThreadsController c = new com.snake.game.ThreadsController(new Tuple(5,5));
         assertEquals(false, ThreadsController.paused);
         KeyboardListener k = new KeyboardListener();
