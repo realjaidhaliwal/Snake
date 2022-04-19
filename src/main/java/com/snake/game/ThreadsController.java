@@ -11,17 +11,21 @@ public class ThreadsController extends Thread {
     Tuple snakeHeadPos2;
     int snakeSize1=3;
     int snakeSize2=3;
+    int score1 = 0;
+    int score2 = 0;
     long speed = 50;
     public static int snakeDirection1;
     public static int snakeDirection2;
     public static boolean paused=false;
+    Window game;
 
     ArrayList<Tuple> positions1 = new ArrayList<Tuple>();
     ArrayList<Tuple> positions2 = new ArrayList<Tuple>();
     Tuple foodPosition;
 
     //Singleplayer Constructor
-    ThreadsController(Tuple initPos){
+    ThreadsController(Window game, Tuple initPos){
+        this.game = game;
         //Get all the threads
         Squares=Window.Grid;
 
@@ -39,7 +43,8 @@ public class ThreadsController extends Thread {
     }
 
     //Multiplayer Constructor
-    ThreadsController(Tuple initPos1, Tuple initPos2){
+    ThreadsController(Window game, Tuple initPos1, Tuple initPos2){
+        this.game = game;
         //Get all the threads
         Squares=Window.Grid;
 
@@ -126,13 +131,14 @@ public class ThreadsController extends Thread {
         }
 
         if (nextPos1.equals(nextPos2) || player1Collision && player2Collision){
-            stopTheGame("Tie");
+            stopTheGame(0);
         }
         if (player1Collision){
-            stopTheGame("Player1 died");
+            stopTheGame(2);
+            
         }
         if (player2Collision){
-            stopTheGame("Player2 died");
+            stopTheGame(1);
         }
 
         boolean eatingFood1 = nextPos1.equals(foodPosition);
@@ -142,8 +148,10 @@ public class ThreadsController extends Thread {
         }
         if(eatingFood1){
             snakeSize1=snakeSize1+1;
+            score1++;
         }else if (eatingFood2){
             snakeSize2=snakeSize2+1;
+            score2++;
         }
         if(eatingFood1 || eatingFood2){
             foodPosition = getPosNotInSnake();
@@ -152,8 +160,38 @@ public class ThreadsController extends Thread {
     }
 
     //Stops The Game
-    private void stopTheGame(String result){
-        System.out.println(result+"\n");
+    private void stopTheGame(int result){
+        String title = "Game Over";
+        String[] restart_button = {"Restart", "Quit"};
+        String message = "";
+        game.setVisible(false);
+        if(Window.gamemode == "one"){
+            message = "Your Score: " + score1;
+        }else{
+            switch(result){
+                case 0:
+                    message = "You Tied!\n" + "Player 1 Score: " + score1 +  "\n" + "Player 2 Score: " + score2;
+                    break;
+                case 1:
+                    message = "Player 1 Wins!\n" + "Player 1 Score: " + score1 +  "\n" + "Player 2 Score: " + score2;
+                    break;
+                case 2:
+                    message = "Player 2 Wins!\n" + "Player 1 Score: " + score1 +  "\n" + "Player 2 Score: " + score2;
+                    break;
+                default: break;
+            }
+        }
+        int response = JOptionPane.showOptionDialog(null, 
+                                                message, title, JOptionPane.OK_CANCEL_OPTION, 
+                                                JOptionPane.INFORMATION_MESSAGE, null, 
+                                                restart_button, null);
+        if(response == JOptionPane.NO_OPTION){
+            System.exit(0);
+        }else if (response == JOptionPane.YES_OPTION) {
+            Main.main(null);
+        }else if (response == JOptionPane.CLOSED_OPTION) {
+            System.exit(0);
+        }
         while(true){
             pauser();
         }
@@ -269,6 +307,5 @@ public class ThreadsController extends Thread {
                 null,
                 buttonname, // this is the array
                 "default");
-
     }
 }
